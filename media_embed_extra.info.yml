@@ -2,6 +2,7 @@ name: 'Media Embed Extra'
 type: module
 description: 'Provides extra override options to the embedded media.'
 core: 8.x
-package: 'Custom'
+core_version_requirement: ^8 || ^9
+package: 'Media'
 dependencies:
   - media
