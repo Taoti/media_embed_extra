@@ -45,7 +45,13 @@ function media_embed_extra_form_editor_media_dialog_alter(&$form, FormStateInter
     $media_embed_element = $form_state->get('media_embed_element');
   }
 
-  $form['width'] = [
+  $form['dimensions'] = [
+    '#type' => 'fieldset',
+    '#title' => 'Dimensions',
+    '#description' => t('Override image type media dimensions. Leave one parameter empty to scale proportionally.'),
+  ];
+
+  $form['dimensions']['width'] = [
     '#title' => t('Width'),
     '#type' => 'number',
     '#step' => '1',
@@ -53,7 +59,7 @@ function media_embed_extra_form_editor_media_dialog_alter(&$form, FormStateInter
     '#parents' => ['attributes', 'data-width'],
   ];
 
-  $form['height'] = [
+  $form['dimensions']['height'] = [
     '#title' => t('Height'),
     '#type' => 'number',
     '#step' => '1',
