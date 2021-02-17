@@ -32,11 +32,26 @@ class MediaEmbed extends CoreMediaEmbed {
     parent::applyPerEmbedMediaOverrides($node, $media);
     if ($image_field = $this->getMediaImageSourceField($media)) {
       $settings = $media->{$image_field}->getItemDefinition()->getSettings();
-      if (!empty($node->getAttribute('data-height'))) {
-        $media->{$image_field}->height = $node->getAttribute('data-height');
+
+      // Check if height and width properties have been provided.
+      $height = $node->getAttribute('data-height');
+      $width = $node->getAttribute('data-width');
+
+      // Resize proportionally if only one value was provided
+      if (empty($width) && !empty($height) ||
+          empty($height) && !empty($width)) {
+        if (empty($width)) {
+          $width = $height * $media->{$image_field}->width / $media->{$image_field}->height;
+        }
+        else {
+          $height = $width * $media->{$image_field}->height / $media->{$image_field}->width;
+        }
       }
-      if (!empty($node->getAttribute('data-width'))) {
-        $media->{$image_field}->width = $node->getAttribute('data-width');
+      if (!empty($height)) {
+        $media->{$image_field}->height = $height;
+      }
+      if (!empty($width)) {
+        $media->{$image_field}->width = $width;
       }
     }
   }
