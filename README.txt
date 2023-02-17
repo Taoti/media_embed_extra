@@ -1,3 +1,5 @@
+# DEPRECATED
+See https://www.drupal.org/project/media_embed_extra instead
 # Media Embed Extra
 ===
 Provides additional options for embedded media entities.
